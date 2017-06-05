@@ -10,7 +10,7 @@ namespace Lab_02.Runner
         public int Cash { get; set; }
         public List<Item> Items { get; set; } = new List<Item>();
 
-        public void PrintInventory()
+        public void RenderInventory()
         {
             Console.WriteLine("----Player Inventory----");
             Console.WriteLine("Name".PadRight(15) + "Description".PadRight(25));
@@ -30,7 +30,7 @@ namespace Lab_02.Runner
             {
                 Console.Clear();
 
-                PrintInventory();
+                RenderInventory();
                 Console.WriteLine(); //blank line
                 Console.WriteLine("1. Exit Inventory");
                 Console.WriteLine();

@@ -12,7 +12,7 @@ namespace Lab_02.Runner
         static void Main(string[] args)
         {
             Test();
-            var inventory = new Inventory {Cash = 150};
+            var inventory = new Inventory { Cash = 150 };
 
             var woodenPick = new Item("Wooden Pick", "It can't break much, but at least it works.", 20);
             var copperPick = new Item("Stone Pick", "It is better than wood, but hard to swing.", 30);
@@ -57,7 +57,7 @@ namespace Lab_02.Runner
         {
             int startingCash = 50;
             var inventory = new Inventory { Cash = startingCash };
-            
+
             var cheapItem = new Item("Cheap Item", "Cheap!", 1);
             var expensiveItem = new Item("Expensive Item", "Expensive!", 10000);
 
@@ -65,19 +65,19 @@ namespace Lab_02.Runner
             store.AddItem(cheapItem);
             store.AddItem(expensiveItem);
 
-            Debug.Assert(store.GetItemByName(cheapItem.Name) == cheapItem);
+            Debug.Assert(store.GetItemByName(cheapItem.Name) == cheapItem, "Loop through all items and return the first one with a matching name.");
             Debug.Assert(store.GetItemByName(expensiveItem.Name) == expensiveItem);
-            
+
             Debug.Assert(inventory.Items.Count == 0, "ensure inventory `List<Item> Items` is initialized!");
 
             store.PurchaseItem(cheapItem.Name, inventory);
-            Debug.Assert(inventory.Items[0] == cheapItem,"cheap item should be in inventory");
+            Debug.Assert(inventory.Items[0] == cheapItem, "cheap item should be in inventory");
             Debug.Assert(inventory.Cash == startingCash - cheapItem.Price);
 
             store.PurchaseItem(expensiveItem.Name, inventory);
             Debug.Assert(inventory.Items.Count == 1, "I could never afford this item.");
-            
 
+            Debug.Assert(store.GetItemByName(expensiveItem.Name.ToUpper()) == expensiveItem, "Can you make GetItemByName case insensitive?");
         }
     }
 }
