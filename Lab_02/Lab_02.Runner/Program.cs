@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Lab_02.Runner
     {
         static void Main(string[] args)
         {
+            Test();
             var inventory = new Inventory {Cash = 150};
 
             var woodenPick = new Item("Wooden Pick", "It can't break much, but at least it works.", 20);
@@ -50,5 +52,32 @@ namespace Lab_02.Runner
                 }
             }
         }
-   }
+
+        static void Test()
+        {
+            int startingCash = 50;
+            var inventory = new Inventory { Cash = startingCash };
+            
+            var cheapItem = new Item("Cheap Item", "Cheap!", 1);
+            var expensiveItem = new Item("Expensive Item", "Expensive!", 10000);
+
+            var store = new Store("Test Store");
+            store.AddItem(cheapItem);
+            store.AddItem(expensiveItem);
+
+            Debug.Assert(store.GetItemByName(cheapItem.Name) == cheapItem);
+            Debug.Assert(store.GetItemByName(expensiveItem.Name) == expensiveItem);
+            
+            Debug.Assert(inventory.Items.Count == 0, "ensure inventory `List<Item> Items` is initialized!");
+
+            store.PurchaseItem(cheapItem.Name, inventory);
+            Debug.Assert(inventory.Items[0] == cheapItem,"cheap item should be in inventory");
+            Debug.Assert(inventory.Cash == startingCash - cheapItem.Price);
+
+            store.PurchaseItem(expensiveItem.Name, inventory);
+            Debug.Assert(inventory.Items.Count == 1, "I could never afford this item.");
+            
+
+        }
+    }
 }

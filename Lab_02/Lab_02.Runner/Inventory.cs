@@ -7,7 +7,7 @@ namespace Lab_02.Runner
     public class Inventory
     {
 
-        public decimal Cash { get; set; }
+        public int Cash { get; set; }
         public List<Item> Items { get; set; } = new List<Item>();
 
         public void PrintInventory()
